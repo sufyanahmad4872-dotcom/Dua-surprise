@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dua | A Magical Surprise</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, serif;
+  color: #654b72;
+  background: linear-gradient(135deg,
+    #ffe5ef, #eee3ff, #e1f3ff, #fff0e7);
+  background-size: 300% 300%;
+  animation: gradient 12s ease infinite;
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+section {
+  padding: 75px 20px;
+  position: relative;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: clamp(42px, 9vw, 75px);
+  color: #b46d9b;
+  margin: 15px 0;
+  text-shadow: 2px 3px 12px #ffffff;
+}
+
+h2 {
+  font-size: 34px;
+  color: #a66b9d;
+  margin-bottom: 20px;
+}
+
+p {
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+.subtitle {
+  max-width: 500px;
+  margin: 10px auto 25px;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 28px;
+  background: linear-gradient(90deg,#e9a9cc,#bda5ec);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 18px #b18cbd55;
+  transition: .3s;
+  margin: 10px;
+}
+
+button:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+
+.gift {
+  font-size: 85px;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  margin: 20px;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-13px); }
+}
+
+.card {
+  background: #ffffffb8;
+  border: 1px solid #ffffff;
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 650px;
+  margin: 25px auto;
+  box-shadow: 0 10px 35px #a98dbb30;
+  backdrop-filter: blur(10px);
+}
+
+.letter {
+  display: none;
+  text-align: left;
+  line-height: 2;
+  animation: appear .8s ease;
+}
+
+.letter.show {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reasons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  gap: 15px;
+  max-width: 850px;
+  margin: 30px auto;
+}
+
+.reason {
+  min-height: 125px;
+  background: #ffffffb8;
+  border-radius: 20px;
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 5px 20px #a98dbb20;
+  transition: .3s;
+}
+
+.reason:hover {
+  transform: translateY(-6px);
+  background: #fff;
+}
+
+.reason span {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.reason small {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.garden {
+  font-size: 45px;
+  letter-spacing: 10px;
+  margin: 30px 0;
+}
+
+.final {
+  background: #ffffff75;
+  border-radius: 30px;
+  max-width: 700px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+#finalMessage {
+  display: none;
+  font-size: 22px;
+  color: #a45f91;
+  margin: 25px auto;
+  line-height: 1.9;
+}
+
+#finalMessage.show {
+  display: block;
+  animation: appear 1s ease;
+}
+
+footer {
+  padding: 30px;
+  color: #987a9d;
+}
+
+.float {
+  position: fixed;
+  bottom: -30px;
+  pointer-events: none;
+  animation: floatUp 7s linear forwards;
+  z-index: 10;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media(max-width:600px) {
+  section { padding: 60px 15px; }
+  h2 { font-size: 28px; }
+  .card { padding: 22px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- WELCOME -->
+<section class="hero">
+  <div style="font-size:45px">🌸 ✨ 🦋</div>
+  <p>A tiny magical world made for</p>
+  <h1>Dua</h1>
+  <p class="subtitle">
+    Somewhere between stars and flowers,
+    there's a little surprise waiting for you.
+  </p>
+  <button onclick="openSurprise()">
+    Open Your Surprise 💌
+  </button>
+  <div class="gift" onclick="openSurprise()">🎁</div>
+  <p style="font-size:13px">A little world of happiness ✨</p>
+</section>
+
+<!-- LETTER -->
+<section id="letterSection">
+  <h2>A Little Letter 💌</h2>
+  <p>Every special person deserves a special message.</p>
+  <button onclick="toggleLetter()">Open Your Letter</button>
+
+  <div class="card letter" id="letter">
+    <h2 style="font-size:26px">Dear Dua, 🌷</h2>
+    <p>
+      I made this little corner of the internet
+      just to bring a smile to your face.
+      <br><br>
+      May your mornings be full of sunshine,
+      your evenings full of peace,
+      and your days full of beautiful surprises.
+      <br><br>
+      Never forget that you deserve kindness,
+      happiness and all the beautiful things
+      life has to offer.
+      <br><br>
+      Keep being your wonderful self.
+      <br><br>
+      With lots of good wishes,
+      <br>
+      Someone who wishes to see you smile. 💗
+    </p>
+  </div>
+</section>
+
+<!-- REASONS -->
+<section>
+  <h2>10 Little Reasons to Smile ✨</h2>
+  <p>Tap any card to reveal a little happiness.</p>
+
+  <div class="reasons" id="reasons"></div>
+</section>
+
+<!-- GARDEN -->
+<section>
+  <h2>Your Happiness Garden 🌼</h2>
+  <p>A little garden filled with magical things.</p>
+  <div class="garden">🌸 🌷 🦋 🌻 🌺</div>
+  <button onclick="makeMagic()">
+    Sprinkle Some Magic ✨
+  </button>
+  <p id="magicText" style="margin-top:20px">
+    Every day deserves a little magic.
+  </p>
+</section>
+
+<!-- FINAL SURPRISE -->
+<section>
+  <div class="final">
+    <h2>One Last Surprise... 💜</h2>
+    <p>
+      Before you leave this little world,
+      there's one more message waiting.
+    </p>
+
+    <button onclick="revealFinal()">
+      Reveal My Surprise 🌙
+    </button>
+
+    <div id="finalMessage">
+      Dua, always remember... 🌷
+      <br><br>
+      You deserve beautiful days,
+      peaceful moments and endless reasons
+      to smile.
+      <br><br>
+      May life always surprise you
+      with something wonderful. ✨
+      <br><br>
+      Keep shining! 💗
+    </div>
+  </div>
+</section>
+
+<footer>
+  Made with care, just for Dua 🌸
+  <br>
+  A little world, a little magic, lots of smiles.
+</footer>
+
+<script>
+
+// Welcome button
+function openSurprise() {
+  document.getElementById("letterSection")
+    .scrollIntoView({behavior:"smooth"});
+  makeMagic();
+}
+
+// Letter open/close
+function toggleLetter() {
+  document.getElementById("letter")
+    .classList.toggle("show");
+}
+
+// 10 interactive cards
+const messages = [
+  "Your smile makes ordinary moments special.",
+  "You deserve all the happiness in the world.",
+  "Never stop believing in yourself.",
+  "Your kindness is something beautiful.",
+  "You make this world a little brighter.",
+  "You deserve peaceful and lovely days.",
+  "Keep chasing your beautiful dreams.",
+  "You are one of a kind.",
+  "May your heart always feel happy.",
+  "Don't forget how special you are."
+];
+
+const reasons = document.getElementById("reasons");
+
+messages.forEach((message,index) => {
+  const box = document.createElement("div");
+  box.className = "reason";
+  box.innerHTML = `
+    <span>🌷</span>
+    <strong>Little Note ${index+1}</strong>
+    <small>Tap to reveal ✨</small>
+  `;
+
+  box.onclick = () => {
+    box.innerHTML = `
+      <span>💗</span>
+      <small>${message}</small>
+    `;
+  };
+
+  reasons.appendChild(box);
+});
+
+// Floating magic
+function makeMagic() {
+  const emojis = ["💗","✨","🌸","🦋","⭐","🌷"];
+
+  for(let i=0;i<18;i++) {
+    const item = document.createElement("div");
+    item.className = "float";
+    item.textContent =
+      emojis[Math.floor(Math.random()*emojis.length)];
+
+    item.style.left = Math.random()*100 + "vw";
+    item.style.fontSize =
+      (18 + Math.random()*20) + "px";
+    item.style.animationDuration =
+      (4 + Math.random()*4) + "s";
+
+    document.body.appendChild(item);
+
+    setTimeout(() => item.remove(),8500);
+  }
+}
+
+// Garden message
+function gardenMessage() {
+  const words = [
+    "You are a little sunshine on a cloudy day. ☀️",
+    "Sending you a garden full of flowers! 🌷",
+    "May something wonderful happen today. ✨",
+    "A little happiness, just for you. 💗",
+    "Keep shining in your own beautiful way. 🦋"
+  ];
+
+  document.getElementById("magicText").textContent =
+    words[Math.floor(Math.random()*words.length)];
+}
+
+function makeMagicAndMessage() {
+  makeMagic();
+  gardenMessage();
+}
+
+// Final reveal
+function revealFinal() {
+  document.getElementById("finalMessage")
+    .classList.add("show");
+  makeMagic();
+}
+
+// Connect garden button
+document.querySelector(".garden + button")
+  .onclick = makeMagicAndMessage;
+
+</script>
+
+</body>
+</html>
